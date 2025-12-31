@@ -1,0 +1,61 @@
+alerting:
+  slack:
+    webhook-url: "${SLACK_WEBHOOK_URL}"
+    default-alert:
+      failure-threshold: 3
+      send-on-resolved: true
+      send-on-recovery: true
+
+security:
+  basic:
+    username: "gatus"
+    password-bcrypt-base64: "JDJ5JDEwJDBpVGszMVV6WWNpZlRCZEdZUnhwck9xV1FWRHQ4bTBMaVBKd2tON0VSMmJLQVN5azZNbm1X"
+
+storage:
+  type: sqlite
+  path: /data/data.db
+
+endpoints:
+  - name: Portfolio
+    group: Personal
+    url: "https://portfolio.accoumar.fr/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1500"
+    alerts:
+      - type: slack
+        description: "🚨 Portfolio website is down or slow."
+
+  - name: Blog
+    group: Personal
+    url: "https://blog.accoumar.fr/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1500"
+    alerts:
+      - type: slack
+        description: "🚨 Blog website is down or slow."
+
+  - name: n8n
+    group: Personal
+    url: "https://n8n.accoumar.fr/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1500"
+    alerts:
+      - type: slack
+        description: "🚨 n8n website is down or slow."
+
+  - name: SQL Dashboard
+    group: Personal
+    url: "https://dashboard.accoumar.fr/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1500"
+    alerts:
+      - type: slack
+        description: "🚨 SQL Dashboard website is down or slow."
