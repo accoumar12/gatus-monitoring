@@ -2,7 +2,7 @@ services:
   gatus:
     image: twinproduction/gatus:v5.33.1
     ports:
-      - "7777:8080"
+      - 8080
     volumes:
       - ./config:/config
       - ./data:/data/
