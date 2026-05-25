@@ -54,3 +54,14 @@ endpoints:
     alerts:
       - type: slack
         description: "🚨 CrossFilterUI website is down or slow."
+
+  - name: Labelizer
+    group: Personal
+    url: "https://labelizer.accoumar.fr/"
+    interval: 30s
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1500"
+    alerts:
+      - type: slack
+        description: "🚨 Labelizer website is down or slow."
